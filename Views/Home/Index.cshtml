@@ -1,8 +1,20 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<ToDoApp.Controllers.TasksController.TaskItem>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Add New Task</h2>
+<form method="post" action="/Tasks/Add">
+    <label>Description:</label><br />
+    <input name="Description" required /><br />
+    <label>Start At:</label><br />
+    <input type="datetime-local" name="StartAt" required /><br />
+    <label>End At:</label><br />
+    <input type="datetime-local" name="EndAt" required /><br />
+    <label>Is Active:</label><br />
+    <input type="checkbox" name="IsActive" value="true" checked /><br />
+    <button type="submit">Add Task</button>
+</form>
+
+<h2>Tasks List</h2>
+<a href="/Tasks/IndexHtml">View as HTML</a>  
+<a href="/Tasks/IndexJson">View as JSON</a>  
+<a href="/Tasks/DownloadTxt">Download as TXT</a>  
+<a href="/Tasks/DownloadJson">Download as JSON</a>
