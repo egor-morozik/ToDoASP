@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using System.Text.Json;
 
 namespace ToDoApp.Controllers
 {
@@ -24,7 +26,9 @@ namespace ToDoApp.Controllers
                 </form>
                 <h2>Tasks List</h2>
                 <a href='/Tasks/IndexHtml'>View as HTML</a>  
-                <a href='/Tasks/IndexJson'>View as JSON</a>";
+                <a href='/Tasks/IndexJson'>View as JSON</a>
+                <a href='/Tasks/DownloadTxt'>Download as TXT</a> 
+                <a href='/Tasks/DownloadJson'>Download as JSON</a>";
             return Content(content, "text/html");
         }
 
@@ -59,6 +63,31 @@ namespace ToDoApp.Controllers
             content += "</ul>";
 
             return Content(content, "text/html");
+        }
+
+        [HttpGet]
+        public IActionResult DownloadTxt()
+        {
+            var sb = new StringBuilder();
+            foreach (var task in _tasks)
+            {
+                sb.AppendLine($"Description: {task.Description}");
+                sb.AppendLine($"Start At: {task.StartAt}");
+                sb.AppendLine($"End At: {task.EndAt}");
+                sb.AppendLine($"Is Active: {task.IsActive}");
+                sb.AppendLine();
+            }
+
+            var bytes = Encoding.UTF8.GetBytes(sb.ToString());
+            return File(bytes, "text/plain", "tasks.txt");
+        }
+
+        [HttpGet]
+        public IActionResult DownloadJson()
+        {
+            var json = JsonSerializer.Serialize(_tasks, new JsonSerializerOptions { WriteIndented = true });
+            var bytes = Encoding.UTF8.GetBytes(json);
+            return File(bytes, "application/json", "tasks.json");
         }
 
         public record TaskItem(
