@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace ToDoApp.Controllers
 {
-    public class TasksController : Controller
+    public class TasksController : LogBaseController
     {
         private static readonly List<TaskItem> _tasks = new();
 
