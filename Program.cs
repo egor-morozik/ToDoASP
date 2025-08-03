@@ -4,8 +4,9 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-app.MapControllerRoute(
+app.MapAreaControllerRoute(
     name: "default",
-    pattern: "{controller=Tasks}/{action=Index}/");
+    areaName: "Task",
+    pattern: "{area:exists}/{controller=Tasks}/{action=Index}/");
 
 app.Run();

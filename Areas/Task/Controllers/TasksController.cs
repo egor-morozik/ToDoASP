@@ -4,6 +4,7 @@ using System.Text.Json;
 
 namespace ToDoApp.Controllers
 {
+    [Area("Task")]
     [Route("{controller}")]
     public class TasksController : LogBaseController
     {
