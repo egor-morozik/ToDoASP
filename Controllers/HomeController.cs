@@ -35,8 +35,14 @@ namespace ToDoApp.Controllers
         [HttpGet]
         public IActionResult IndexHtml()
         {
-            return View("IndexHtml", _tasks); 
+            return View(_tasks); 
         }
+
+        [HttpGet]
+        public IActionResult _TaskList()
+        {
+            return PartialView(); 
+        }        
 
         [HttpGet]
         public IActionResult DownloadTxt()

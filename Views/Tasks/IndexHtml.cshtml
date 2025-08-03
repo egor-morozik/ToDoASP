@@ -1,16 +1,4 @@
 @model List<ToDoApp.Controllers.TasksController.TaskItem>
 
 <h2>Tasks List</h2>
-@if (Model.Any())
-{
-    <ul>
-        @foreach (var task in Model)
-        {
-            <li>@task.Description (Active: @task.IsActive)</li>
-        }
-    </ul>
-}
-else
-{
-    <p>No tasks available.</p>
-}
+@await Html.PartialAsync("_TaskList", Model)
