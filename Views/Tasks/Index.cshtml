@@ -1,4 +1,7 @@
 ﻿@model List<ToDoApp.Controllers.TasksController.TaskItem>
+@{
+    ViewBag.Title = "MainPage";
+}
 
 <h2>Add New Task</h2>
 <form method="post" action="/Tasks/Add">
@@ -18,3 +21,7 @@
 <a href="/Tasks/IndexJson">View as JSON</a>  
 <a href="/Tasks/DownloadTxt">Download as TXT</a>  
 <a href="/Tasks/DownloadJson">Download as JSON</a>
+
+@section Footer {
+   Copyright© Egor Morozik, @DateTime.Now.Year. All rights reserved
+}
