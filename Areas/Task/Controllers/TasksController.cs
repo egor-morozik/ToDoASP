@@ -2,23 +2,17 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Text.Json;
 
-namespace ToDoApp.Controllers
+namespace ToDoASP.Areas.Task.Controllers
 {
-    [Area("Task")]
-    [Route("{controller}")]
     public class TasksController : LogBaseController
     {
         private static readonly List<TaskItem> _tasks = new();
-        
-        [Route("{action}")]
-        [HttpGet]
+
         public IActionResult Index()
         {
             return View(_tasks);
         }
 
-        [Route("{action}")]
-        [HttpPost]
         public IActionResult Add(TaskItem task)
         {
             if (!ModelState.IsValid)
@@ -30,29 +24,21 @@ namespace ToDoApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Route("{action}")]
-        [HttpGet]
         public IActionResult IndexJson()
         {
             return Json(_tasks);
         }
 
-        [Route("{action}")]
-        [HttpGet]
         public IActionResult IndexHtml()
         {
             return View(_tasks);
         }
 
-        [Route("{action}")]
-        [HttpGet]
         public IActionResult _TaskList()
         {
             return PartialView();
         }
 
-        [Route("{action}")]
-        [HttpGet]
         public IActionResult DownloadTxt()
         {
             var sb = new StringBuilder();
@@ -69,8 +55,6 @@ namespace ToDoApp.Controllers
             return File(bytes, "text/plain", "tasks.txt");
         }
 
-        [Route("{action}")]
-        [HttpGet]
         public IActionResult DownloadJson()
         {
             var json = JsonSerializer.Serialize(_tasks, new JsonSerializerOptions { WriteIndented = true });
